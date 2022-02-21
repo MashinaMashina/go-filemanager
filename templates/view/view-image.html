@@ -1,0 +1,10 @@
+{{template "header.html"}}
+{{template "breadcrumb.html" .Breadcrumb}}
+
+    Просмотр файла <a href="/?path={{.Dir}}">{{.Dir}}</a>{{.Name}}
+
+    <div class="image-preview">
+        <img src="{{.Src}}">
+    </div>
+
+{{template "footer.html"}}

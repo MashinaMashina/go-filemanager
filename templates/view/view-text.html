@@ -1,0 +1,39 @@
+{{template "header.html"}}
+{{template "breadcrumb.html" .Breadcrumb}}
+
+{{if .Exists}}
+    <div class="control-bar">
+        <a class="control-bar__link icon icon-download" href="{{.DownloadLink}}">Скачать</a>
+    </div>
+{{end}}
+
+<form method="POST">
+    <input type="hidden" name="_csrf" value="{{.CSRF}}">
+    {{if .Exists}}
+        <div class="form-wrap">
+            Редактирование файла {{.Name}}
+        </div>
+    {{else}}
+        <div class="form-wrap">
+            Создание файла
+        </div>
+    {{end}}
+    <div class="form-wrap">
+        {{.Message}}
+    </div>
+    {{if not .Exists}}
+    <div class="form-wrap">
+        Имя файла:<br>
+        <input type="text" name="name" placeholder="file.txt" value="{{.Name}}">
+    </div>
+    {{end}}
+    <div class="form-wrap">
+        Контент:<br>
+        <textarea name="content">{{.Content}}</textarea>
+    </div>
+    <div class="form-wrap">
+        <input type="submit" value="Сохранить">
+    </div>
+</form>
+
+{{template "footer.html"}}

@@ -1,0 +1,40 @@
+{{template "header.html"}}
+{{template "breadcrumb.html" .Breadcrumb}}
+
+<div class="control-bar">
+    <a class="control-bar__link icon icon-new" href="{{.CreateFileUrl}}">Создать файл</a>
+</div>
+
+<table>
+    <tr>
+        <td class="files-table__filename">Имя файла</td>
+        <td>Дата изменения</td>
+        <td>Размер</td>
+    </tr>
+
+    {{ range .Files}}
+        <tr>
+            <td>
+                <div class="file-controls" tabindex="0">
+                    <div class="file-controls__wrap">
+                        <div class="file-controls__burger">
+                            ...
+                        </div>
+                        <div class="file-controls__items">
+                            <div>{{ .Name }}</div>
+                            {{ if not .IsDir }} <a href="{{.DownloadLink}}" class="link icon icon-download">Скачать</a> {{ end }}
+                            <a href="{{.RenameLink}}" class="link icon icon-rename">Переименовать</a>
+                            <form action="{{.RemoveLink}}" method="POST" onsubmit="return confirm('Удалить {{if .IsDir}}папку{{else}}файл{{end}} {{ .Name }}?')">
+                                <button type="submit" class="link icon icon-remove">Удалить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{.ViewLink}}" class="file-link icon {{ if .IsDir }}icon-dir{{else}}icon-file{{ end }} {{ if .IsHidden }}is-hidden{{ end }}">{{ .Name }}</a></td>
+            <td>{{.HumanModTime}}</td>
+            <td>{{ if not .IsDir }} {{.HumanSize}} {{ end }}</td>
+        </tr>
+    {{ end }}
+</table>
+
+{{template "footer.html"}}

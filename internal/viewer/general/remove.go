@@ -17,7 +17,7 @@ func Remove(path string, c *gin.Context) {
 
 	dir, _ := filepath.Split(path)
 
-	err := os.Remove(path)
+	err := os.RemoveAll(path)
 	if err != nil {
 		errorpage.Page("Не удается удалить "+path+". Ошибка: "+err.Error(), c)
 		return

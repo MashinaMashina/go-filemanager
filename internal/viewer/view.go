@@ -27,9 +27,13 @@ func openPath(c *gin.Context) {
 
 	if _, remove := c.GetQuery("remove"); remove {
 		general.Remove(path, c)
+	} else if _, rename := c.GetQuery("rename"); rename {
+		general.Rename(path, c)
 	} else if isDir {
 		if _, fileCreate := c.GetQuery("create_file"); fileCreate {
 			file.Create(path, c)
+		} else if _, dirCreate := c.GetQuery("create_dir"); dirCreate {
+			dir.Create(path, c)
 		} else {
 			dir.View(path, c)
 		}

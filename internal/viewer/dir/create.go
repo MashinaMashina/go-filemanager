@@ -1,4 +1,4 @@
-package file
+package dir
 
 import (
 	"errors"
@@ -7,40 +7,32 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	csrf "github.com/utrack/gin-csrf"
-	"io/ioutil"
 	"net/http"
 	"os"
-	"path/filepath"
 )
 
+type CreateDTO struct {
+	CSRF       string
+	Message    string
+	Name       string
+	Breadcrumb breadcrumb.Breadcrumb
+}
+
 func Create(dir string, c *gin.Context) {
-	dto := TextDTO{
+	dto := CreateDTO{
 		CSRF:       csrf.GetToken(c),
-		Dir:        dir,
-		Exists:     false,
 		Breadcrumb: breadcrumb.NewBreadcrumb(dir),
 	}
 
 	if name := c.DefaultPostForm("name", ""); name != "" {
 		path := dir + string(os.PathSeparator) + name
-		content := c.DefaultPostForm("content", "")
-
-		dir, _ = filepath.Split(path)
-
-		if _, dirErr := os.Stat(dir); errors.Is(dirErr, os.ErrNotExist) {
-			if err := os.MkdirAll(dir, 0760); err != nil {
-				dto.Message = "Ошибка создания папки файла: " + err.Error()
-			}
-		}
 
 		dto.Name = name
-		dto.Content = content
-
 		var fileErr error
 		if _, fileErr = os.Stat(path); errors.Is(fileErr, os.ErrNotExist) {
-			err := ioutil.WriteFile(path, []byte(content), 0760)
+			err := os.MkdirAll(path, 0760)
 			if err != nil {
-				dto.Message = "Ошибка создания файла: " + err.Error()
+				dto.Message = "Ошибка создания папки: " + err.Error()
 			} else {
 				c.Redirect(http.StatusFound, links.View(dir).String())
 				return
@@ -55,5 +47,5 @@ func Create(dir string, c *gin.Context) {
 		}
 	}
 
-	c.HTML(http.StatusOK, "view-text.html", dto)
+	c.HTML(http.StatusOK, "create-dir.html", dto)
 }

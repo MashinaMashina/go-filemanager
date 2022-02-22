@@ -1,0 +1,21 @@
+{{template "header.html"}}
+{{template "breadcrumb.html" .Breadcrumb}}
+
+<form method="POST">
+    <input type="hidden" name="_csrf" value="{{.CSRF}}">
+    <div class="form-wrap">
+        Создание папки
+    </div>
+    <div class="form-wrap">
+        {{.Message}}
+    </div>
+    <div class="form-wrap">
+        Укажите имя папки:<br>
+        <input type="text" name="name" placeholder="folder" value="{{.Name}}">
+    </div>
+    <div class="form-wrap">
+        <input type="submit" value="Создать" class="btn">
+    </div>
+</form>
+
+{{template "footer.html"}}

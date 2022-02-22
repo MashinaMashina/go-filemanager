@@ -29,6 +29,18 @@ func CreateFile(dir string) *url.URL {
 
 	return u
 }
+func CreateDir(dir string) *url.URL {
+	u := &url.URL{
+		Path: "/",
+	}
+
+	query := u.Query()
+	query.Add("path", dir)
+	query.Add("create_dir", "true")
+	u.RawQuery = query.Encode()
+
+	return u
+}
 
 func View(path string) *url.URL {
 	u := &url.URL{

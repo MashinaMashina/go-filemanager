@@ -23,7 +23,7 @@ input[type="number"], select, textarea {
 }
 textarea {
     width: 100%;
-    min-height: 500px;
+    min-height: 300px;
 }
 .btn {
     background: #febe02;
@@ -87,22 +87,25 @@ a, .link {
     top: 1px;
 }
 .icon.icon-file:before {
-    background-position-x: 0;
-}
-.icon.icon-dir:before {
     background-position-x: -20px;
 }
-.icon.icon-new:before {
+.icon.icon-dir:before {
     background-position-x: -40px;
 }
-.icon.icon-download:before {
+.icon.icon-new-file:before {
     background-position-x: -60px;
 }
-.icon.icon-rename:before {
+.icon.icon-download:before {
     background-position-x: -80px;
 }
-.icon.icon-remove:before {
+.icon.icon-rename:before {
     background-position-x: -100px;
+}
+.icon.icon-remove:before {
+    background-position-x: -120px;
+}
+.icon.icon-new-dir:before {
+    background-position-x: -140px;
 }
 .file-link.is-hidden {
     opacity: 0.3;

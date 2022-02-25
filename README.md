@@ -9,10 +9,10 @@
 - Удаление файлов и картинок
 
 Просмотр папки:  
-![Preview](preview/Screenshot_211.png)
+![Preview](preview/Screenshot_211.png)  
 Контекстное меню файла:  
-![Preview](preview/Screenshot_212.png)
+![Preview](preview/Screenshot_212.png)  
 Просмотр изображения:  
-![Preview](preview/Screenshot_206.png)
+![Preview](preview/Screenshot_206.png)  
 Загрузка файлов:  
-![Preview](preview/Screenshot_210.png)
+![Preview](preview/Screenshot_210.png)  

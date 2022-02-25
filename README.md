@@ -8,9 +8,11 @@
 - Переименование файлов и картинок
 - Удаление файлов и картинок
 
-Просмотр папки:
-![Preview](preview/Screenshot_204.png)
-Контекстное меню файла:
-![Preview](preview/Screenshot_205.png)
-Просмотр изображения:
+Просмотр папки:  
+![Preview](preview/Screenshot_211.png)
+Контекстное меню файла:  
+![Preview](preview/Screenshot_212.png)
+Просмотр изображения:  
 ![Preview](preview/Screenshot_206.png)
+Загрузка файлов:  
+![Preview](preview/Screenshot_210.png)

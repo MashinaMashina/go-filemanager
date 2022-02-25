@@ -38,6 +38,7 @@ type DTO struct {
 	Files         []viewFile
 	Dir           string
 	CreateFileUrl *url.URL
+	UploadFileUrl *url.URL
 	CreateDirUrl  *url.URL
 	Breadcrumb    breadcrumb.Breadcrumb
 }
@@ -59,6 +60,7 @@ func View(path string, c *gin.Context) {
 		Files:         files,
 		Dir:           path,
 		CreateFileUrl: links.CreateFile(path),
+		UploadFileUrl: links.UploadFile(path),
 		CreateDirUrl:  links.CreateDir(path),
 		Breadcrumb:    breadcrumb.NewBreadcrumb(path),
 	}

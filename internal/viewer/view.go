@@ -25,19 +25,32 @@ func openPath(c *gin.Context) {
 		return
 	}
 
-	if _, remove := c.GetQuery("remove"); remove {
+	action := c.DefaultQuery("action", "")
+
+	switch action {
+	case "remove":
 		general.Remove(path, c)
-	} else if _, rename := c.GetQuery("rename"); rename {
+	case "rename":
 		general.Rename(path, c)
-	} else if isDir {
-		if _, fileCreate := c.GetQuery("create_file"); fileCreate {
-			file.Create(path, c)
-		} else if _, dirCreate := c.GetQuery("create_dir"); dirCreate {
-			dir.Create(path, c)
+	default:
+		if isDir {
+			switch action {
+			case "upload":
+				file.Upload(path, c)
+			case "create_file":
+				file.Create(path, c)
+			case "create_dir":
+				dir.Create(path, c)
+			default:
+				dir.View(path, c)
+			}
 		} else {
-			dir.View(path, c)
+			switch action {
+			case "download":
+				file.DownloadFile(path, c)
+			default:
+				file.View(path, c)
+			}
 		}
-	} else {
-		file.View(path, c)
 	}
 }

@@ -5,5 +5,5 @@ import (
 )
 
 func viewUnknownFile(path string, c *gin.Context) {
-	downloadFile(path, c)
+	DownloadFile(path, c)
 }

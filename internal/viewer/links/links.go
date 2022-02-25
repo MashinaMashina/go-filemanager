@@ -11,7 +11,7 @@ func DownloadFile(file string) *url.URL {
 
 	query := u.Query()
 	query.Add("path", file)
-	query.Add("download", "true")
+	query.Add("action", "download")
 	u.RawQuery = query.Encode()
 
 	return u
@@ -24,11 +24,12 @@ func CreateFile(dir string) *url.URL {
 
 	query := u.Query()
 	query.Add("path", dir)
-	query.Add("create_file", "true")
+	query.Add("action", "create_file")
 	u.RawQuery = query.Encode()
 
 	return u
 }
+
 func CreateDir(dir string) *url.URL {
 	u := &url.URL{
 		Path: "/",
@@ -36,7 +37,20 @@ func CreateDir(dir string) *url.URL {
 
 	query := u.Query()
 	query.Add("path", dir)
-	query.Add("create_dir", "true")
+	query.Add("action", "create_dir")
+	u.RawQuery = query.Encode()
+
+	return u
+}
+
+func UploadFile(dir string) *url.URL {
+	u := &url.URL{
+		Path: "/",
+	}
+
+	query := u.Query()
+	query.Add("path", dir)
+	query.Add("action", "upload")
 	u.RawQuery = query.Encode()
 
 	return u
@@ -61,7 +75,7 @@ func Rename(path string) *url.URL {
 
 	query := u.Query()
 	query.Add("path", path)
-	query.Add("rename", "true")
+	query.Add("action", "rename")
 	u.RawQuery = query.Encode()
 
 	return u
@@ -74,7 +88,7 @@ func Remove(path, csrf string) *url.URL {
 
 	query := u.Query()
 	query.Add("path", path)
-	query.Add("remove", "true")
+	query.Add("action", "remove")
 	query.Add("_csrf", csrf)
 	u.RawQuery = query.Encode()
 

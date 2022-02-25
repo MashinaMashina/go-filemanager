@@ -9,7 +9,7 @@ import (
 	"strconv"
 )
 
-func downloadFile(path string, c *gin.Context) {
+func DownloadFile(path string, c *gin.Context) {
 	file, err := filesystem.NewFileFromPath(path)
 
 	if err != nil {

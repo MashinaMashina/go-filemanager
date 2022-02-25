@@ -1,0 +1,39 @@
+{{template "header.html"}}
+{{template "breadcrumb.html" .Breadcrumb}}
+
+<form method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="_csrf" value="{{.CSRF}}">
+    <div class="form-wrap">
+        Загрузка файлов
+    </div>
+    <div class="form-wrap">
+        {{.Message}}
+    </div>
+    <div id="file-inputs">
+        Файлы:<br>
+    </div>
+    <div class="form-wrap">
+        <input type="button" class="btn" onclick="addFileInput()" value="Добавить файл">
+    </div>
+    <div class="form-wrap">
+        <input type="submit" value="Загрузить" class="btn">
+    </div>
+</form>
+
+<template id="file-input">
+    <div class="form-wrap">
+        <label class="file">
+            <input type="file" name="file[]" onchange="this.parentElement.querySelector('.file-custom').setAttribute('data-filename', this.files[0].name)">
+            <span class="file-custom" data-filename="Выберите файл..."></span>
+        </label>
+    </div>
+</template>
+
+<script>
+    function addFileInput() {
+        document.getElementById('file-inputs').insertAdjacentHTML('beforeend', document.getElementById('file-input').innerHTML)
+    }
+    addFileInput()
+</script>
+
+{{template "footer.html"}}

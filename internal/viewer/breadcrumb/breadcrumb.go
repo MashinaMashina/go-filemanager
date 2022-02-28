@@ -18,13 +18,18 @@ func NewBreadcrumb(dir string) Breadcrumb {
 	segments := make([]Segment, 0)
 	s := strings.Split(dir, string(os.PathSeparator))
 
+	segments = append(segments, Segment{
+		Name: "/",
+		Path: "/",
+	})
+
 	var way string
 	for _, segment := range s {
 		if segment == "" {
 			continue
 		}
 
-		way += segment + "/"
+		way += "/" + segment
 		segments = append(segments, Segment{
 			Name: segment,
 			Path: way,
